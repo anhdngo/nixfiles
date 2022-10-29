@@ -1,0 +1,464 @@
+# Should you change your keyboard layout some time, delete
+# this file and re-run i3-config-wizard(1).
+
+set $browser $BROWSER
+set $browser2 $BROWSER2
+set $ebooks $EBOOKS
+set $pictures $PICTURES
+set $screenshots ~/Pictures/screenshots
+
+# Set common scripts to vars
+set $rofi $DOTFILES/scripts/rofi/launch.sh
+set $music $DOTFILES/scripts/music/mpv-controller.sh
+#set $statusbar bumblebee-status -m battery date time pasink pasource -p root.path=/ time.format="%I:%M:%S %p" date.format="%a, %b %d %Y" nic.exclude="ham0,docker0,lo" -t greyish-powerline
+# set $statusbar i3blocks
+
+exec_always --no-startup-id feh --bg-max --randomize $pictures/wallpapers/*
+#gaps outer 5
+#gaps inner 10
+#gaps bottom 35
+for_window [class="^.*"] border pixel 1
+
+font xft:Hack Nerd Font Mono 8:pango:DejaVu Sans Mono 8:monospace 8
+
+bindsym $alt+Shift+c reload
+bindsym $alt+Shift+r restart
+
+set $alt Mod1
+set $sup Mod4
+
+floating_modifier $alt
+
+# Color Themes (Tango) {{{
+
+# $i3-theme-window
+# tango dark
+set_from_resource $primary      primary     #CE5C00
+set_from_resource $secondary    secondary   #204A87
+
+set_from_resource $darktext     darkblack      #555753
+set_from_resource $lighttext    white      #EEEEEC
+set_from_resource $darkbg       darkblack      #2E3436
+set_from_resource $lightbg      darkwhite      #BABDB6
+
+set_from_resource $warning      red      #CC0000
+
+# <clientclass> <border> <backg> <text> <indicator>
+client.focused          $primary $primary $lighttext $secondary
+client.focused_inactive $darkbg  $darkbg  $lighttext $darkbg
+client.unfocused        $darkbg  $darkbg  $lighttext $darkbg
+client.urgent           $warning $warning $lighttext $warning
+
+# }}}
+
+# i3 Bar {{{ 
+bar {
+    # hide bar and reveal when win key is pressed
+    mode hide
+    hidden_state hide
+    modifier $sup
+    # show status
+    #status_command $statusbar
+    # fonts
+    font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+    font pango:Dejavu Sans Mono 9
+
+    colors {
+        # <workclass> <border> <backg> <text>
+        focused_workspace 	$primary $primary $lighttext
+        active_workspace 	$darkbg $darkbg   $lighttext
+        inactive_workspace	$darkbg $darkbg   $lighttext
+        urgent_workspace 	$warning $warning $lighttext
+
+        background #000000
+        separator  $darkblack
+        statusline $darkblack
+    }
+
+}
+
+bindsym $alt+b bar mode hide; bar hidden_state hide
+bindsym $alt+Shift+b bar mode toggle; bar hidden_state toggle }}}
+
+# Application Hotkeys {{{
+
+bindsym $alt+Control+t exec i3-sensible-terminal # -e tmux
+bindsym $alt+Control+Return exec zsh $DOTFILES/scripts/shell/i3_shell.sh
+
+bindsym $alt+Control+r exec $ebooks
+
+bindsym Control+BackSpace kill
+bindsym $alt+Control+e exec thunar
+
+# start dmenu/rofi (a program launcher)
+#bindsym $alt+Control+space exec "rofi -modi run,calc -show run"
+bindsym $alt+Control+space exec --no-startup-id $rofi appmenu
+bindsym Control+Delete exec --no-startup-id $rofi powermenu
+
+# browser
+bindsym $alt+Control+b exec --no-startup-id $browser
+bindsym $alt+Control+Shift+b exec --no-startup-id $browser2
+
+# password manager
+bindsym $alt+Control+p exec bwmenu
+
+# }}}
+
+# Focus Navigation {{{
+bindsym $alt+h focus left
+bindsym $alt+j focus down
+bindsym $alt+k focus up
+bindsym $alt+l focus right
+bindsym $alt+Left focus left
+bindsym $alt+Down focus down
+bindsym $alt+Up focus up
+bindsym $alt+Right focus right
+
+bindsym $alt+u focus parent
+bindsym $alt+i focus child
+
+bindsym $alt+Tab focus output right
+bindsym $alt+Shift+Tab focus output left
+
+bindsym $alt+Shift+h move left
+bindsym $alt+Shift+j move down
+bindsym $alt+Shift+k move up
+bindsym $alt+Shift+l move right
+bindsym $alt+Shift+Left move left
+bindsym $alt+Shift+Down move down
+bindsym $alt+Shift+Up move up
+bindsym $alt+Shift+Right move right
+
+bindsym $sup+k fullscreen toggle
+bindsym $sup+j floating toggle
+bindsym $alt+n fullscreen toggle
+bindsym $alt+m floating toggle
+bindsym $sup+Up fullscreen toggle
+bindsym $sup+Down floating toggle
+
+bindsym $alt+v split toggle
+bindsym $alt+minus split v
+bindsym $alt+backslash split h
+
+bindsym $alt+q layout tabbed
+bindsym $alt+w layout splith
+bindsym $alt+e layout splitv
+bindsym $alt+s layout stacking
+
+bindsym F1 layout tabbed
+bindsym F2 layout splith
+bindsym F3 layout splitv
+bindsym F4 layout stacking
+
+bindsym $sup+Shift+1 layout tabbed
+bindsym $sup+Shift+2 layout splith
+bindsym $sup+Shift+3 layout splitv
+bindsym $sup+Shift+4 layout stacking
+
+# change focus between tiling / floating windows
+bindsym $alt+space focus mode_toggle
+# }}}
+
+# Workspace Navigation {{{
+# set workspace names
+set $ws1 " 1 "
+set $ws2 " 2 "
+set $ws3 " 3 "
+set $ws4 " 4 "
+set $ws5 " 5 "
+set $ws6 " 6 "
+set $ws7 " 7 "
+set $ws8 " 8 "
+set $ws9 " 9 "
+set $ws10 " 10 "
+
+# switch to workspace
+bindsym $sup+1 workspace $ws1
+bindsym $sup+2 workspace $ws2
+bindsym $sup+3 workspace $ws3
+bindsym $sup+4 workspace $ws4
+bindsym $sup+5 workspace $ws5
+bindsym $sup+6 workspace $ws6
+bindsym $sup+7 workspace $ws7
+bindsym $sup+8 workspace $ws8
+bindsym $sup+9 workspace $ws9
+bindsym $sup+0 workspace $ws10
+
+# switch workspace using left and right
+bindsym $sup+h workspace prev
+bindsym $sup+l workspace next
+bindsym $sup+Left workspace prev
+bindsym $sup+Right workspace next
+
+# enable alt+tab to change focus
+bindsym $sup+Tab workspace next
+bindsym $sup+Shift+Tab workspace prev
+
+# move focused container to workspace
+#bindsym $sup+Shift+1 move container to workspace $ws1; workspace $ws1
+#bindsym $sup+Shift+2 move container to workspace $ws2; workspace $ws2
+#bindsym $sup+Shift+3 move container to workspace $ws3; workspace $ws3
+#bindsym $sup+Shift+4 move container to workspace $ws4; workspace $ws4
+#bindsym $sup+Shift+5 move container to workspace $ws5; workspace $ws5
+#bindsym $sup+Shift+6 move container to workspace $ws6; workspace $ws6
+#bindsym $sup+Shift+7 move container to workspace $ws7; workspace $ws7
+#bindsym $sup+Shift+8 move container to workspace $ws8; workspace $ws8
+#bindsym $sup+Shift+9 move container to workspace $ws9; workspace $ws9
+#bindsym $sup+Shift+0 move container to workspace $ws10; workspace $ws10
+
+bindsym $sup+q move container to workspace $ws1; workspace $ws1
+bindsym $sup+w move container to workspace $ws2; workspace $ws2
+bindsym $sup+e move container to workspace $ws3; workspace $ws3
+bindsym $sup+r move container to workspace $ws4; workspace $ws4
+bindsym $sup+t move container to workspace $ws5; workspace $ws5
+bindsym $sup+y move container to workspace $ws6; workspace $ws6
+bindsym $sup+u move container to workspace $ws7; workspace $ws7
+bindsym $sup+i move container to workspace $ws8; workspace $ws8
+bindsym $sup+o move container to workspace $ws9; workspace $ws9
+bindsym $sup+p move container to workspace $ws10; workspace $ws10
+
+# move focused container to next/prev workspace
+bindsym $sup+Shift+h move container to workspace prev; workspace prev
+bindsym $sup+Shift+l move container to workspace next; workspace next
+bindsym $sup+Shift+Left move container to workspace prev; workspace prev
+bindsym $sup+Shift+Right move container to workspace next; workspace next
+
+# move workspace to next/prev monitor
+bindsym $alt+$sup+h move workspace to output left
+bindsym $alt+$sup+l move workspace to output right
+bindsym $alt+$sup+Left move workspace to output left
+bindsym $alt+$sup+Right move workspace to output right
+
+# move focused container to next/prev monitor
+bindsym $alt+$sup+k move container to output left
+bindsym $alt+$sup+j move container to output right
+bindsym $alt+$sup+Up move container to output left
+bindsym $alt+$sup+Down move container to output right
+
+# }}}
+
+# Window Defaults {{{
+# Assign apps to default workspaces
+# Use xprop to get class
+# assign [class="class"] $ws#
+#for_window [class="class"] move to workspace $ws#
+
+# }}}
+
+# Scratchpad and Dropdown {{{
+#
+#bindsym Control+$alt+p scratchpad show; move position center
+#bindsym Control+$alt+i move scratchpad
+
+# Dropdown
+# set $dropdown "dropdown"
+# for_window [title=$dropdown] floating enable
+# for_window [title=$dropdown] resize set 625 400
+# for_window [title=$dropdown] move scratchpad
+# for_window [title=$dropdown] border pixel 5
+# exec --no-startup-id terminator -T $dropdown -e tmux
+# bindsym F9 [title=$dropdown] scratchpad show; [title=$dropdown] move position center
+
+# Audio
+set $pavucontrol "pavucontrol"
+for_window [instance=$pavucontrol] floating enable
+for_window [instance=$pavucontrol] resize set 1600 800
+for_window [instance=$pavucontrol] move scratchpad
+for_window [instance=$pavucontrol] border pixel 5
+bindsym Control+$alt+a exec --no-startup-id pavucontrol; [instance=$pavucontrol] scratchpad show; [instance=$pavucontrol] move position center
+
+# Arandr window
+set $arandr "arandr"
+for_window [instance=$arandr] floating enable
+for_window [instance=$pomodoro] move scratchpad
+for_window [instance=$arandr] border pixel 5
+bindsym Control+$alt+l exec --no-startup-id "$DOTFILES/scripts/runinstance.sh arandr arandr"; [instance=$arandr] scratchpad show; [instance=$arandr] move position center
+
+# }}}
+
+# X Session/System Mode {{{
+# exit i3 (logs you out of your X session)
+bindsym $alt+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# mode to suspend/shutdown computer
+# set $Locker i3lock -i $linux_configs/wallpapers/wallpaper.png && sleep 1
+#set $Locker $linux_configs/scripts/lock.sh
+set $Locker $DOTFILES/scripts/lock/multimonitor_lock.sh -n -f
+
+set $mode_system "l: | e: | s: | t:ﮊ | h:⏾ | r:勒 | S: "
+mode $mode_system {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id "$Locker; systemctl suspend", mode "default"
+    bindsym h exec --no-startup-id "$Locker; systemctl hibernate", mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # troll mode
+    bindsym t exec --no-startup-id i3lock -u -i $(find $pictures/troll-wallpapers -name "*.png" | shuf -n1), mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym Control+c mode "default"
+}
+bindsym $alt+Control+Delete mode $mode_system
+bindsym $alt+Control+BackSpace mode $mode_system
+
+# }}}
+
+# Resize Mode {{{
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+
+    bindsym Shift+h resize shrink width 2 px or 2 ppt
+    bindsym Shift+j resize grow height 2 px or 2 ppt
+    bindsym Shift+k resize shrink height 2 px or 2 ppt
+    bindsym Shift+l resize grow width 2 px or 2 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Shift+Left resize shrink width 2 px or 2 ppt
+    bindsym Shift+Down resize grow height 2 px or 2 ppt
+    bindsym Shift+Up resize shrink height 2 px or 2 ppt
+    bindsym Shift+Right resize grow width 2 px or 2 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym Control+c mode "default"
+}
+
+bindsym $alt+r mode "resize"
+# }}}
+
+# Hardware Buttons Control {{{
+# Volume Control (requires pulseaudio and alsa-utils)
+# pulseaudio
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5%
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5%
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
+# alsa
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer set Master 5%+"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer set Master 5%-"
+bindsym XF86AudioMute exec --no-startup-id "amixer set Master toggle"
+
+# Screen Brightness Controls (requires xbacklight)
+bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 1; notify-send -t 500 $(xbacklight)"
+bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 1; notify-send -t 500 $(xbacklight)"
+
+# Media player controls
+bindsym XF86AudioPlay exec --no-startup-id playerctl play
+bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+# }}}
+
+# Screenshot {{{
+# Takes screenshot with scrot, then uses xclip to save that to clipboard
+bindsym --release $alt+Shift+p exec mkdir -p $screenshots && scrot -s -e 'xclip -selection c -t image/png < $f' $screenshots/%Y%m%d-%H%M%S.png
+#bindsym --release $alt+p exec mkdir -p $screenshots && scrot -u -e 'xclip -selection c -t image/png < $f' $screenshots/%Y%m%d-%H%M%S.png
+#bindsym --release $alt+$sup+p exec mkdir -p $screenshots && scrot -e 'xclip -selection c -t image/png < $f' $screenshots/%Y%m%d-%H%M%S.png
+
+set $mode_screenshot "a:fullscreen | s:selection | f:focus "
+mode $mode_screenshot {
+    # Takes screenshot with scrot, then uses xclip to save that to clipboard
+    bindsym --release f exec mkdir -p $screenshots && scrot -u -e 'xclip -selection c -t image/png < $f' $screenshots/%Y%m%d-%H%M%S.png, mode "default"
+    bindsym --release s exec mkdir -p $screenshots && scrot -s -e 'xclip -selection c -t image/png < $f' $screenshots/%Y%m%d-%H%M%S.png, mode "default"
+    bindsym --release a exec mkdir -p $screenshots && scrot -e 'xclip -selection c -t image/png < $f' $screenshots/%Y%m%d-%H%M%S.png, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym Control+c mode "default"
+}
+bindsym $alt+p mode $mode_screenshot
+
+
+# }}}
+
+# Display Settings {{{
+set $mode_display "Display (l) layout, (r) resolution, Arandr (a)"
+mode $mode_display {
+    bindsym l exec --no-startup-id "$DOTFILES/scripts/monitor/monitor_layout.sh", mode "default"
+    bindsym r exec --no-startup-id "$DOTFILES/scripts/monitor/rofi-randr", mode "default"
+    bindsym a exec --no-startup-id "arandr", mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym Control+c mode "default"
+}
+bindsym $alt+Control+d mode $mode_display
+
+bindsym $alt+Control+1 exec --no-startup-id "xrandr --output eDP1 --primary --mode 1920x1080 --output DP1 --off --output DP2 --off"
+bindsym $alt+Control+2 exec --no-startup-id "xrandr --output eDP1 --primary --mode 1920x1080 --output DP1 --right-of eDP1 --mode 1920x1080 --output DP2 --off"
+bindsym $alt+Control+3 exec --no-startup-id "xrandr --output eDP1 --primary --mode 1920x1080 --output DP1 --right-of eDP1 --mode 1920x1080 --output DP2 --right-of DP1 --mode 1920x1080"
+
+# }}}
+
+# Mouse Control {{{
+
+# button1 = left mouse button
+# button2 = scroll wheel button
+# button3 = right mouse button
+# button4/5 = scroll up/down
+# button6/7 = side scroll wheel button (work mouse)
+# button8/9 = side scroll wheel button (home mouse), thumb buttons (work mouse)
+
+# alt+right mouse: toggle floating
+bindsym --whole-window $alt+button3 fullscreen disable, floating toggle
+
+# click scrollbar: toggle fullscreen
+bindsym --whole-window button2 fullscreen toggle
+
+# side scroll wheel moves window to other monitor
+#bindsym --whole-window button6 move container to output left
+#bindsym --whole-window button7 move container to output right
+
+#bindsym --whole-window button8 move container to output left
+#bindsym --whole-window button9 move container to output right
+
+#bindsym --whole-window button6 workspace prev
+#bindsym --whole-window button7 workspace next
+
+bindsym --whole-window button8 workspace prev
+bindsym --whole-window button9 workspace next
+
+# scroll up/down for resizing
+# horizontal
+bindsym --whole-window $alt+button4 resize grow width 5px or 5ppt
+bindsym --whole-window $alt+button5 resize shrink width 5px or 5ppt
+# vertical
+bindsym --whole-window $alt+Shift+button4 resize grow height 5px or 5ppt
+bindsym --whole-window $alt+Shift+button5 resize shrink height 5px or 5ppt
+
+# }}}
+
+bindsym Control+Shift+g exec --no-startup-id "$DOTFILES/scripts/toggle_grayscale.sh", mode "default"
+# exec --no-startup-id "$DOTFILES/scripts/toggle_grayscale.sh"
+
+exec --no-startup-id nm-applet
+exec --no-startup-id /opt/pcloud
+exec --no-startup-id pcloud
+exec --no-startup-id guake --no-startup-script
+exec --no-startup-id blueman-tray
+
+# Allow scripts to interface with dbus
+#exec_always --no-startup-id ~/scripts/misc/Xdbus.sh
+
+exec --no-startup-id volumeicon
+# exec_always --no-startup-id /usr/bin/python $DOTFILES/scripts/i3/alternating_layouts.py
+exec_always --no-startup-id picom --no-use-damage
+#exec_always --no-startup-id pkill dunst; dunst
+#exec_always --no-startup-id $DOTFILES/scripts/polybar/launch.sh
+
+# vim:foldmethod=marker:foldlevel=0
