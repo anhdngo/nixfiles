@@ -19,7 +19,7 @@ PATH="$HOME/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 
 # Environment Variables {{{
-export SHELL=$HOME/.nix-profile/bin/zsh
+export SHELL=/usr/bin/zsh
 export EDITOR=$HOME/.nix-profile/bin/vim
 #export TERMINAL=$HOME/.nix-profile/bin/kitty
 

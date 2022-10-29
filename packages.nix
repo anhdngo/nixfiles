@@ -1,6 +1,6 @@
 pkgs: with pkgs; [
   # Essential
-  zsh
+  #zsh
   git
   pavucontrol
   rofi
