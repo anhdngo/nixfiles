@@ -83,6 +83,7 @@ bindsym $alt+Shift+b bar mode toggle; bar hidden_state toggle }}}
 # Application Hotkeys {{{
 
 bindsym $alt+Control+t exec i3-sensible-terminal # -e tmux
+bindsym $alt+Control+Shift+t exec $HOME/.nix-profile/bin/kitty
 bindsym $alt+Control+Return exec zsh $DOTFILES/scripts/shell/i3_shell.sh
 
 bindsym $alt+Control+r exec $ebooks
