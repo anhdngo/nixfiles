@@ -44,12 +44,14 @@ fi
 
 # Environment Variables {{{
 export SHELL=/usr/bin/zsh
-export DOTFILES=$HOME/.local/share/chezmoi
+export DOTFILES=$HOME/.config/nixpkgs
 export EDITOR=$(which vim)
 export TERMINAL=$(which kitty)
 
-export BROWSER="flatpak run com.brave.Browser"
-export BROWSER_PRIVATE="flatpak run com.brave.Browser --incognito"
+# export BROWSER="flatpak run com.brave.Browser"
+# export BROWSER_PRIVATE="flatpak run com.brave.Browser --incognito"
+export BROWSER="brave"
+export BROWSER_PRIVATE="brave --incognito"
 
 export EBOOKS=/usr/bin/calibre
 
