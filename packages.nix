@@ -30,5 +30,6 @@ pkgs: with pkgs; [
   (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" "DroidSansMono" "Hack" ]; })
 
   # Themes
-  arc-theme
+  # arc-theme # doesn't work here, install with dnf
+  lxappearance
 ]

@@ -2,7 +2,7 @@
 # this file and re-run i3-config-wizard(1).
 
 set $browser $BROWSER
-set $browser2 $BROWSER2
+set $browser2 $BROWSER_PRIVATE
 set $pictures $PICTURES
 set $screenshots ~/Pictures/screenshots
 
