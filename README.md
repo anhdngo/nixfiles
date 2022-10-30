@@ -1,6 +1,11 @@
 # nixfiles
 Nix files for use with home-manager
 
+# Quick Install
+```
+sh -c "$(curl -fsSL https://gitlab.com/anhdngo/nixfiles/-/raw/master/install.sh)"
+```
+
 # Install
 ## Connect to Wifi
 ```

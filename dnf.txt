@@ -1,3 +1,4 @@
+git
 zsh
 rxvt-unicode
 python3-pip
