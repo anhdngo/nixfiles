@@ -1,6 +1,5 @@
 # Environment Variables
 export WS=$HOME/workspace
-export JDFS=$HOME/pCloudDrive/jdfs
 
 # Ease of Use
 alias sl="ls"
@@ -37,23 +36,8 @@ alias dl="cd ~/Downloads"
 alias doc="cd ~/Documents"
 alias cf="cd $CONFIG"
 alias df="cd $DOTFILES"
-alias ws="cws"
+alias ws="cd $WS"
 alias sync="cd $SYNC"
-alias autouploadv3="$WS/evt/automation-scripts-misc/jetson/autouploadv3"
-alias dockerlogin="aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 778784628106.dkr.ecr.us-west-1.amazonaws.com; aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 778784628106.dkr.ecr.us-west-2.amazonaws.com"
-
-alias evt="cd /evt"
-alias ev="cd /evt"
-alias ds="cd /evt/device-scripts"
-alias dtt="cd /evt/device-scripts/device_testing_tool"
-
-# Vimwiki Shortcuts
-alias vws="cd $VIMWIKI"
-alias vw="vim $VIMWIKI/index.md"
-alias vwd="vim -c :VimwikiMakeDiaryNote"
-alias vwt="vim -c :VimwikiMakeTomorrowDiaryNote"
-alias vwy="vim -c :VimwikiMakeYesterdayDiaryNote"
-alias vwi="vim $VIMWIKI/diary/diary.md -c :VimwikiDiaryGenerateLinks"
 
 # Xrandr presets
 alias xr1="xrandr --output eDP1 --primary --mode 1920x1080 --output DP1 --off --output DP2 --off"
@@ -66,143 +50,6 @@ alias usbon='sudo modprobe xhci_pci xhci_hcd'
 
 # Nix
 alias hms='home-manager switch'
-
-# Prompt Command {{{}
-precmd() { eval "$PROMPT_COMMAND" }
-export PROMPT_COMMAND="pwd > /tmp/whereami"
-
-cwsfunc() {
-    case "$#" in
-        0) # 0 arg: error
-            echo "Workspace not defined"
-            ;;
-        1) # 1 arg: cd ws
-            cd ${1}
-            ;;
-        2) # 2 arg: cd
-            cd ${1}/${2}*
-            ;;
-        3)
-            echo "Multiple directories matched"
-            ;;
-    esac
-}
-# }}}
-
-# Johnny Decimal System {{{
-ejdfunc() { echo ${1}/*/*/${2}* }
-# cd into jd directory, or home jd dir if no arg
-cjdfunc() { 
-     case "$#" in
-        0) # 0 arg: error
-            echo "JD filesystem not defined"
-            ;;
-        1) # 1 arg: cd root
-            cd ${1}
-            ;;
-        2) # 2 arg: cd
-            if [[ "$2" == *.* ]]
-            then cd ${1}/*/*/${2}*
-            else cd ${1}/*/${2}*
-            fi
-            ;;
-        *) # 3 arg: error
-            echo "Multiple directories matched"
-            ;;
-    esac
-}
-#lists expanded jd directory
-ljdfunc() {
-    case "$#" in
-        0) # 0 arg: error
-            echo "JD filesystem not defined"
-            ;;
-        1) # 1 arg: cd root
-            tree ${1} -L 2
-            ;;
-        2) # 2 arg: cd
-            if [[ "$2" == *.* ]]
-            then tree ${1}/*/*/${2}* -L 1
-            else tree ${1}/*/${2}* -L 1
-            fi
-            ;;
-        *) # 3 arg: error
-            echo "Multiple directories matched"
-            ;;
-    esac
-}
-# misc mv and cp commands
-mvjdfunc() { mv ${@:2:-1} -t ${1}/*/*/${@:$# }* }
-cpjdfunc() { cp ${@:2:-1} -t ${1}/*/*/${@:$# }* }
-
-# Shorter 2-level Johnny Decimal
-sejdfunc() { echo ${1}/*/${2}* }
-# cd into jd directory, or home jd dir if no arg
-scjdfunc() { 
-     case "$#" in
-        0) # 0 arg: error
-            echo "JD filesystem not defined"
-            ;;
-        1) # 1 arg: cd root
-            cd ${1}
-            ;;
-        2) # 2 arg: cd
-            if [[ "$2" == *.* ]]
-            then cd ${1}/*/${2}*
-            else cd ${1}/${2}*
-            fi
-            ;;
-        *) # 3 arg: error
-            echo "Multiple directories matched"
-            ;;
-    esac
-}
-#lists expanded jd directory
-sljdfunc() {
-    case "$#" in
-        0) # 0 arg: error
-            echo "JD filesystem not defined"
-            ;;
-        1) # 1 arg: cd root
-            tree ${1} -L 2
-            ;;
-        2) # 2 arg: cd
-            if [[ "$2" == *.* ]]
-            then tree ${1}/*/${2}* -L 1
-            else tree ${1}/${2}* -L 1
-            fi
-            ;;
-        *) # 3 arg: error
-            echo "Multiple directories matched"
-            ;;
-    esac
-}
-# misc mv and cp commands
-smvjdfunc() { mv ${@:2:-1} -t ${1}/*/${@:$# }* }
-scpjdfunc() { cp ${@:2:-1} -t ${1}/*/${@:$# }* }
-
-
-# }}}
-
-# Johnny Decimal System - sub-filesystems {{{
-# cd into jd directory, or home jd dir if no arg
-
-# pcloud
-alias cjd="cjdfunc $JDFS"
-alias ljd="ljdfunc $JDFS"
-alias mvjd="mvjdfunc $JDFS"
-alias cpjd="cpjdfunc $JDFS"
-
-# workspace
-alias cws="cwsfunc $WS"
-alias lws="sljdfunc $WS"
-alias mvws="smvjdfunc $WS"
-alias cpws="scpjdfunc $WS"
-# }}}
-
-# App Shortcuts
-alias vpn="/opt/cisco/anyconnect/bin/vpn connect vpn.ucsd.edu"
-alias vpnd="/opt/cisco/anyconnect/bin/vpn disconnect vpn.ucsd.edu"
 
 # Scripts
 alias ledgerudev="wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash"
