@@ -31,6 +31,9 @@ export PICTURES=$SYNC/assets
 export DOTFILES=$HOME/.config/nixpkgs
 export CONFIG=$HOME/.config
 
+# For nix to handle locales
+export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+
 # }}}
 
 # vim:foldmethod=marker:foldlevel=0

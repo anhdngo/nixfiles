@@ -9,4 +9,5 @@
   ".config/i3/config".source = ./dotfiles/config/i3/config;
   ".config/kitty/kitty.conf".source = ./dotfiles/config/kitty/kitty.conf;
   ".config/rofi/config.rasi".source = ./dotfiles/config/rofi/config.rasi;
+  ".config/rofi/Arc-Dark.rasi".source = ./dotfiles/config/rofi/Arc-Dark.rasi;
 }

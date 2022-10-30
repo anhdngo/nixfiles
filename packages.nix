@@ -27,4 +27,7 @@ pkgs: with pkgs; [
 
   # Fonts
   (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" "DroidSansMono" "Hack" ]; })
+
+  # Themes
+  arc-theme
 ]

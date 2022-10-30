@@ -3,12 +3,10 @@
 
 set $browser $BROWSER
 set $browser2 $BROWSER2
-set $ebooks $EBOOKS
 set $pictures $PICTURES
 set $screenshots ~/Pictures/screenshots
 
 # Set common scripts to vars
-set $rofi $DOTFILES/scripts/rofi/launch.sh
 set $music $DOTFILES/scripts/music/mpv-controller.sh
 #set $statusbar bumblebee-status -m battery date time pasink pasource -p root.path=/ time.format="%I:%M:%S %p" date.format="%a, %b %d %Y" nic.exclude="ham0,docker0,lo" -t greyish-powerline
 # set $statusbar i3blocks
@@ -86,22 +84,15 @@ bindsym $alt+Control+t exec i3-sensible-terminal # -e tmux
 bindsym $alt+Control+Shift+t exec $HOME/.nix-profile/bin/kitty
 bindsym $alt+Control+Return exec zsh $DOTFILES/scripts/shell/i3_shell.sh
 
-bindsym $alt+Control+r exec $ebooks
-
 bindsym Control+BackSpace kill
 bindsym $alt+Control+e exec thunar
 
 # start dmenu/rofi (a program launcher)
-#bindsym $alt+Control+space exec "rofi -modi run,calc -show run"
-bindsym $alt+Control+space exec --no-startup-id $rofi appmenu
-bindsym Control+Delete exec --no-startup-id $rofi powermenu
+bindsym $alt+Control+space exec "rofi -modi drun -show drun"
 
 # browser
 bindsym $alt+Control+b exec --no-startup-id $browser
 bindsym $alt+Control+Shift+b exec --no-startup-id $browser2
-
-# password manager
-bindsym $alt+Control+p exec bwmenu
 
 # }}}
 

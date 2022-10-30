@@ -63,6 +63,9 @@ alias xr3="xrandr --output eDP1 --primary --mode 1920x1080 --output DP1 --right-
 alias usboff='sudo rmmod xhci_pci; sudo rmmod xhci_hcd'
 alias usbon='sudo modprobe xhci_pci xhci_hcd'
 
+# Nix
+alias hms='home-manager switch'
+
 # Prompt Command {{{}
 precmd() { eval "$PROMPT_COMMAND" }
 export PROMPT_COMMAND="pwd > /tmp/whereami"
