@@ -1,6 +1,10 @@
 .PHONY: all
 all: nix home-manager
 
+.PHONY: dnf
+dnf:
+	sudo dnf install -y $(shell grep -vE "^\s*#" ./dnf.txt | tr "\n" " ")
+
 .PHONY: nix
 nix:
 	curl -L https://nixos.org/nix/install | sh

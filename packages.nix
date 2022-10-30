@@ -24,4 +24,7 @@ pkgs: with pkgs; [
   cryptomator
   veracrypt
   pcloud
+
+  # Fonts
+  (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" "DroidSansMono" "Hack" ]; })
 ]
