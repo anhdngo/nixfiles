@@ -8,6 +8,7 @@ pkgs: with pkgs; [
   vim
   kitty
   p7zip
+  picom
 
   # Other
   feh

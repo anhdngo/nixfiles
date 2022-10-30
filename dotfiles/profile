@@ -28,8 +28,8 @@ export BROWSER_PRIVATE="brave --incognito"
 
 export SYNC=$HOME/sync
 export PICTURES=$SYNC/assets
-export DOTFILES=$HOME/.config/nixpkgs
-export CONFIG=$HOME/.config
+export CONFIG=$HOME/.config/nixpkgs
+export DOTFILES=$HOME/.config/nixpkgs/dotfiles
 
 # For nix to handle locales
 export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive

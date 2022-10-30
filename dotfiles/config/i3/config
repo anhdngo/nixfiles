@@ -7,7 +7,6 @@ set $pictures $PICTURES
 set $screenshots ~/Pictures/screenshots
 
 # Set common scripts to vars
-set $music $DOTFILES/scripts/music/mpv-controller.sh
 #set $statusbar bumblebee-status -m battery date time pasink pasource -p root.path=/ time.format="%I:%M:%S %p" date.format="%a, %b %d %Y" nic.exclude="ham0,docker0,lo" -t greyish-powerline
 # set $statusbar i3blocks
 
@@ -81,8 +80,7 @@ bindsym $alt+Shift+b bar mode toggle; bar hidden_state toggle }}}
 # Application Hotkeys {{{
 
 bindsym $alt+Control+t exec i3-sensible-terminal # -e tmux
-bindsym $alt+Control+Shift+t exec $HOME/.nix-profile/bin/kitty
-bindsym $alt+Control+Return exec zsh $DOTFILES/scripts/shell/i3_shell.sh
+bindsym $alt+Control+Shift+t exec /usr/bin/urxvt
 
 bindsym Control+BackSpace kill
 bindsym $alt+Control+e exec thunar
@@ -259,12 +257,11 @@ for_window [instance=$pavucontrol] move scratchpad
 for_window [instance=$pavucontrol] border pixel 5
 bindsym Control+$alt+a exec --no-startup-id pavucontrol; [instance=$pavucontrol] scratchpad show; [instance=$pavucontrol] move position center
 
-# Arandr window
 set $arandr "arandr"
 for_window [instance=$arandr] floating enable
 for_window [instance=$pomodoro] move scratchpad
 for_window [instance=$arandr] border pixel 5
-bindsym Control+$alt+l exec --no-startup-id "$DOTFILES/scripts/runinstance.sh arandr arandr"; [instance=$arandr] scratchpad show; [instance=$arandr] move position center
+bindsym Control+$alt+l exec --no-startup-id arandr; [instance=$arandr] scratchpad show; [instance=$arandr] move position center
 
 # }}}
 
@@ -275,7 +272,7 @@ bindsym $alt+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # mode to suspend/shutdown computer
 # set $Locker i3lock -i $linux_configs/wallpapers/wallpaper.png && sleep 1
 #set $Locker $linux_configs/scripts/lock.sh
-set $Locker $DOTFILES/scripts/lock/multimonitor_lock.sh -n -f
+set $Locker $CONFIG/scripts/lock/multimonitor_lock.sh -n -f
 
 set $mode_system "l: | e: | s: | t:ﮊ | h:⏾ | r:勒 | S: "
 mode $mode_system {
@@ -381,8 +378,8 @@ bindsym $alt+p mode $mode_screenshot
 # Display Settings {{{
 set $mode_display "Display (l) layout, (r) resolution, Arandr (a)"
 mode $mode_display {
-    bindsym l exec --no-startup-id "$DOTFILES/scripts/monitor/monitor_layout.sh", mode "default"
-    bindsym r exec --no-startup-id "$DOTFILES/scripts/monitor/rofi-randr", mode "default"
+    bindsym l exec --no-startup-id "$CONFIG/scripts/monitor/monitor_layout.sh", mode "default"
+    bindsym r exec --no-startup-id "$CONFIG/scripts/monitor/rofi-randr", mode "default"
     bindsym a exec --no-startup-id "arandr", mode "default"
 
     bindsym Return mode "default"
@@ -435,8 +432,8 @@ bindsym --whole-window $alt+Shift+button5 resize shrink height 5px or 5ppt
 
 # }}}
 
-bindsym Control+Shift+g exec --no-startup-id "$DOTFILES/scripts/toggle_grayscale.sh", mode "default"
-# exec --no-startup-id "$DOTFILES/scripts/toggle_grayscale.sh"
+bindsym Control+Shift+g exec --no-startup-id "$CONFIG/scripts/toggle_grayscale.sh", mode "default"
+# exec --no-startup-id "$CONFIG/scripts/toggle_grayscale.sh"
 
 exec --no-startup-id nm-applet
 exec --no-startup-id /opt/pcloud
@@ -448,9 +445,6 @@ exec --no-startup-id blueman-tray
 #exec_always --no-startup-id ~/scripts/misc/Xdbus.sh
 
 exec --no-startup-id volumeicon
-# exec_always --no-startup-id /usr/bin/python $DOTFILES/scripts/i3/alternating_layouts.py
 exec_always --no-startup-id picom --no-use-damage
-#exec_always --no-startup-id pkill dunst; dunst
-#exec_always --no-startup-id $DOTFILES/scripts/polybar/launch.sh
 
 # vim:foldmethod=marker:foldlevel=0
