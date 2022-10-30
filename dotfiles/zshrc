@@ -68,8 +68,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -80,36 +78,17 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 if [ -f ~/.aliases ];
 then
     source ~/.aliases
 fi
 
-# Source programs to shell
-if [ -f ~/.sourcerc ];
-then
-    source ~/.sourcerc
-fi
-
 # Remove weird % partial line symbol on terminal open
 unsetopt prompt_cr prompt_sp
-
-#echo $(shuf -n 1 $VIMWIKI/quotes.md) | lolcat
-#source $DOTFILES/scripts/vimwiki/checklist.sh
 
 # disable ctrl+s terminal freeze in interactive shells
 if [[ -t 0 && $- = *i* ]]
@@ -119,12 +98,4 @@ fi
 
 # key modifications
 setxkbmap -option caps:super
-#export PATH="$HOME/.pyenv/bin:$PATH"
-#    eval "$(pyenv init -)"
-#    eval "$(pyenv virtualenv-init -)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# source /usr/share/nvm/init-nvm.sh
 
