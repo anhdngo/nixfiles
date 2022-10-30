@@ -4,6 +4,7 @@ all: nix home-manager
 .PHONY: dnf
 dnf:
 	sudo dnf install -y $(shell grep -vE "^\s*#" ./dnf.txt | tr "\n" " ")
+	pip install --user bumblebee-status
 
 .PHONY: nix
 nix:

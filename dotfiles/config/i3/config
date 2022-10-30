@@ -7,8 +7,7 @@ set $pictures $PICTURES
 set $screenshots ~/Pictures/screenshots
 
 # Set common scripts to vars
-#set $statusbar bumblebee-status -m battery date time pasink pasource -p root.path=/ time.format="%I:%M:%S %p" date.format="%a, %b %d %Y" nic.exclude="ham0,docker0,lo" -t greyish-powerline
-# set $statusbar i3blocks
+set $statusbar bumblebee-status -m battery date time pasink pasource -p root.path=/ time.format="%I:%M:%S %p" date.format="%a, %b %d %Y" nic.exclude="ham0,docker0,lo" -t greyish-powerline
 
 exec_always --no-startup-id feh --bg-max --randomize $pictures/wallpapers/*
 #gaps outer 5
@@ -55,7 +54,7 @@ bar {
     hidden_state hide
     modifier $sup
     # show status
-    #status_command $statusbar
+    status_command $statusbar
     # fonts
     font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
     font pango:Dejavu Sans Mono 9
